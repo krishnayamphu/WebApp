@@ -18,7 +18,9 @@ public class WelcomeController extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter pw=response.getWriter();
 
-        pw.println("Welcome to Servlet API");
-
+//        pw.println("Welcome to Servlet API");
+        String name="Krishna";
+request.setAttribute("name",name);
+request.getRequestDispatcher("welcome.jsp").forward(request,response);
     }
 }
