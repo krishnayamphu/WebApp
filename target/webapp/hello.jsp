@@ -12,5 +12,11 @@
 </head>
 <body>
 <h1>Hello world !</h1>
+
+<%
+    String name=request.getParameter("user");
+%>
+
+<h1>Your name is : <%=name%></h1>
 </body>
 </html>
