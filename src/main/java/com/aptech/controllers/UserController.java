@@ -1,11 +1,16 @@
 package com.aptech.controllers;
 
+import com.aptech.dao.UserDao;
+import com.aptech.helpers.Database;
+import com.aptech.models.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,32 +19,24 @@ import java.util.List;
 public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int userId=Integer.parseInt(request.getParameter("userid"));
+
+        int status=UserDao.deleteUser(userId);
+
+        PrintWriter pw=response.getWriter();
+        if(status==1){
+            pw.println("User deleted successfully.");
+        }else {
+            pw.println("Sorry !, User can't delete.");
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con= DriverManager.getConnection(
-                    "jdbc:mysql://localhost/dbaptech?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
 
-            //sql statement
-            String sql="SELECT * FROM users";
-            PreparedStatement ps=con.prepareStatement(sql);
-            //return resultset from exe query
-            ResultSet rs=ps.executeQuery();
+        List<User> allusers= UserDao.getAllUsers();
 
-            List<String> userlist=new ArrayList<>();
-
-            //retrieving individual records
-            while (rs.next()){
-                userlist.add(rs.getString("username"));
-            }
-            request.setAttribute("userlist",userlist);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        request.setAttribute("userlist",allusers);
 
         request.getRequestDispatcher("/users/index.jsp").forward(request,response);
     }

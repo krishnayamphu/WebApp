@@ -13,9 +13,27 @@
 </head>
 <body>
 <h3>All Users</h3>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Action</th>
+    </tr>
 
 <c:forEach var="user" items="${userlist}">
-    <p>${user}</p>
+    <tr>
+        <td>${user.id}</td>
+        <td>${user.username}</td>
+        <td>${user.password}</td>
+        <td>Edit |
+            <form action="/webapp/users" method="post">
+                <input type="hidden" name="userid" value="${user.id}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
 </c:forEach>
+</table>
 </body>
 </html>
