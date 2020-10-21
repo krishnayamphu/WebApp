@@ -26,7 +26,11 @@
         <td>${user.id}</td>
         <td>${user.username}</td>
         <td>${user.password}</td>
-        <td>Edit |
+        <td>
+            <a href="/webapp/users/edit?userId=${user.id}">
+                <button>Edit</button>
+            </a>
+            |
             <form action="/webapp/users" method="post">
                 <input type="hidden" name="userid" value="${user.id}">
                 <button type="submit">Delete</button>

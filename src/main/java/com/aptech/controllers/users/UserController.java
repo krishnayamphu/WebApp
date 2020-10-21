@@ -1,4 +1,4 @@
-package com.aptech.controllers;
+package com.aptech.controllers.users;
 
 import com.aptech.dao.UserDao;
 import com.aptech.helpers.Database;
@@ -26,6 +26,7 @@ public class UserController extends HttpServlet {
         PrintWriter pw=response.getWriter();
         if(status==1){
             pw.println("User deleted successfully.");
+            response.sendRedirect("/webapp/users");
         }else {
             pw.println("Sorry !, User can't delete.");
         }
