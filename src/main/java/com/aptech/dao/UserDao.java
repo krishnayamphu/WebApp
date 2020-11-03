@@ -40,7 +40,6 @@ public class UserDao {
         return allUsers;
     }
 
-
     //delete user
     public static int deleteUser(int userId) {
         //sql statement
@@ -57,6 +56,7 @@ public class UserDao {
 
     }
 
+    //save user
     public static boolean save(User user) {
         boolean status = false;
         int check = 0;
@@ -80,6 +80,7 @@ public class UserDao {
         return status;
     }
 
+    //get user by id
     public static User getUserById(int userId) {
         User user = null;
         //sql statement
@@ -101,6 +102,7 @@ public class UserDao {
         return user;
     }
 
+    //update user by id
     public static int update(User user) {
         int status = 0;
         //sql statement
@@ -115,5 +117,21 @@ public class UserDao {
             e.printStackTrace();
         }
         return status;
+    }
+
+    //return total no. of users
+    public static int getTotalUser(){
+        int total=0;
+        //sql statement
+        String sql = "SELECT COUNT(username) from users";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            rs.next();
+            total=rs.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
     }
 }

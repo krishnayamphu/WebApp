@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-6">
     <div class="d-flex justify-content-between mt-5 mb-3">
-        <h4>All Users</h4>
+        <h4>All Users (${totalUsers})</h4>
         <a class="btn btn-info" href="/webapp/users/create">New User</a>
     </div>
    

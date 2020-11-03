@@ -36,8 +36,10 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<User> allusers= UserDao.getAllUsers();
+        int totalUsers=UserDao.getTotalUser();
 
         request.setAttribute("userlist",allusers);
+        request.setAttribute("totalUsers",totalUsers);
 
         request.getRequestDispatcher("/users/index.jsp").forward(request,response);
     }
