@@ -134,4 +134,33 @@ public class UserDao {
         }
         return total;
     }
+
+    //return all users
+    public static List<User> getUserByName(String username) {
+        List<User> allUsers = new ArrayList<>();
+
+        //sql statement
+        String sql = "SELECT * FROM users WHERE username LIKE '" +username+"%'";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            //retrieving individual records
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+
+                allUsers.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //return resultset from exe query
+        return allUsers;
+    }
+
+
 }

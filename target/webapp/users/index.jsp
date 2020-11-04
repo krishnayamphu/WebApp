@@ -19,6 +19,7 @@
     <div class="d-flex justify-content-between mt-5 mb-3">
         <h4>All Users (${totalUsers})</h4>
         <a class="btn btn-info" href="/webapp/users/create">New User</a>
+        <a class="btn btn-success" href="/webapp/users/search">Search User</a>
     </div>
    
 
