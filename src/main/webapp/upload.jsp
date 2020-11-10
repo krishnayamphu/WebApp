@@ -15,7 +15,24 @@
             </form>
         </div>
     </div>
+
+
+    <div class="row row-cols-1 row-cols-md-4">
+        <c:forEach var="image" items="${images}">
+            <div class="col mb-4">
+                <div class="card">
+                    <form class="form-inline" action="/webapp/del-image" method="post">
+                        <input type="hidden" name="imageName" value="${image}">
+                        <button class="btn btn-danger"  type="submit"> X </button>
+                    </form>
+                    <img class="card-img-top" src="http://localhost:8080/webapp/uploads/${image}" alt="${image}">
+                </div>
+            </div>
+        </c:forEach>
+
+    </div>
 </div>
+
 
 <%@ include file="bs-script.jsp" %>
 

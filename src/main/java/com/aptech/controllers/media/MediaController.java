@@ -1,5 +1,6 @@
 package com.aptech.controllers.media;
 
+import com.aptech.helpers.MediaHelper;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -75,6 +76,9 @@ public class MediaController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("upload.jsp").forward(request,response);
+        MediaHelper mediaHelper=new MediaHelper(getServletContext());
+        List<String> images=mediaHelper.getMediaList();
+        request.setAttribute("images",images);
+        request.getRequestDispatcher("upload.jsp").forward(request,response);
     }
 }

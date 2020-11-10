@@ -24,10 +24,34 @@ public class MediaHelper {
         if (allFiles != null) {
             for (File f : allFiles) {
                 allFileList.add(f.getName());
-                System.out.println(f.getName());
+//                System.out.println(f.getName());
             }
         }
 
         return allFileList;
+    }
+
+    //delete media
+    //delete media file
+    public  boolean deleteMedia(String imageName) {
+        boolean status = false;
+        String root = myContext.getRealPath("/");
+        String path=root + "/uploads";
+        File file = new File(path);
+        if (file.exists()) {
+            String[] filename = file.list();
+            for (String name : filename) {
+                if (name.equals(imageName)) {
+                    File myFile = new File(path + "\\" + name);
+                    myFile.delete();
+                    status = true;
+                    System.out.println(name + " is deleted");
+                }
+//                System.out.println(name);
+            }
+        } else {
+            System.out.println("no such a file");
+        }
+        return status;
     }
 }
